@@ -13,7 +13,7 @@ export const config = {
 }
 
 function constructSlackPayload(projects: Project[]) {
-  const papersPayload = projects.map(({ repo_name, description, stars, language }) => {
+  const projectsPayload = projects.map(({ repo_name, description, stars, language }) => {
     const projects = {
       type: "section",
       text: {
@@ -37,7 +37,7 @@ function constructSlackPayload(projects: Project[]) {
       {
         "type": "divider"
       },
-      ...papersPayload
+      ...projectsPayload
     ]
   }
   return completePayload
