@@ -13,17 +13,20 @@ export const config = {
 }
 
 function constructSlackPayload(projects: Project[]) {
-  const projectsPayload = projects.filter(({ language }) => language === "Javascript" || language === "Python").map(({ repo_name, description, stars, language }) => {
-    const projects = {
-      type: "section",
-      text: {
-        type: "mrkdwn",
-        text: `*${repo_name}*\n\nDescription: ${description}\nStars in past 24 hrs: ${stars}\nLink: https://github.com/${repo_name}\nLanguage: ${language}\n\n`
-      },
-    }
+  const projectsPayload = projects
+    .filter(({ language }) => language === "Javascript" || language === "Python")
+    .sort((a: Project, b: Project) => a.stars - b.stars)
+    .map(({ repo_name, description, stars, language }) => {
+      const projects = {
+        type: "section",
+        text: {
+          type: "mrkdwn",
+          text: `*${repo_name}*\n\nDescription: ${description}\nStars in past 24 hrs: ${stars}\nLink: https://github.com/${repo_name}\nLanguage: ${language}\n\n`
+        },
+      }
 
-    return projects
-  })
+      return projects
+    })
 
   const completePayload = {
     "blocks": [
