@@ -14,7 +14,7 @@ export const config = {
 
 function constructSlackPayload(projects: Project[]) {
   const projectsPayload = projects
-    .filter(({ language }) => language === "Javascript" || language === "Python")
+    .filter(({ language }) => language === "JavaScript" || language === "Python")
     .sort((a: Project, b: Project) => a.stars - b.stars)
     .reverse()
     .map(({ repo_name, description, stars, language }) => {
